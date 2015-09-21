@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    card_view:cardBackgroundColor="#336699"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/thumbnailCategoryRow"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:id="@+id/categoryNameCategoryRow"
+            android:layout_width="wrap_content"
+            android:layout_below="@id/thumbnailCategoryRow"
+            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:text="New Text" />
+
+        <TextView
+            android:id="@+id/profilesCountCategoryRow"
+            android:layout_width="wrap_content"
+            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/categoryNameCategoryRow"
+            android:layout_height="wrap_content"
+            android:text="New Text" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
