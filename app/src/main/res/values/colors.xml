@@ -5,4 +5,8 @@
     <color name="accent">#E8005A</color>
     <color name="accent_translucent">#80E8005A</color>
     <color name="accent_bright">#ff005f</color>
+
+    <color name="snack">#4CAF50</color>
+
+
 </resources>

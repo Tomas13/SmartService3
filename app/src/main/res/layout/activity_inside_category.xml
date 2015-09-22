@@ -1,12 +1,60 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="kz.growit.smartservice.activities.InsideCategory">
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kz.growit.smartservice.activities.CategoryActivity">
 
-    <TextView android:text="We are inside of a category" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
 
-</RelativeLayout>
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+
+
+        <include
+            android:id="@+id/toolbarInsideCategory"
+            layout="@layout/toolbar" />
+    </android.support.design.widget.AppBarLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:text="We are inside of a category" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/categoriesRV"
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginTop="?attr/actionBarSize" />
+
+
+    <!--<android.support.v4.widget.NestedScrollView-->
+    <!--android:id="@+id/scroll"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="fill_parent"-->
+    <!--android:clipToPadding="false"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior">-->
+
+    <!-- -->
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/insideCategoryFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:baselineAlignBottom="true"
+        android:clickable="true"
+        android:src="@drawable/ic_search"
+        app:layout_anchor="@id/categoriesRV"
+        app:layout_anchorGravity="bottom|right|end"
+        app:layout_behavior=".fab.FloatingActionButtonBehavior"/>
+</android.support.design.widget.CoordinatorLayout>

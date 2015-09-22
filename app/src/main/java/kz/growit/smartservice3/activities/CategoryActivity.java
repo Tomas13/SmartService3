@@ -29,6 +29,12 @@ public class CategoryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.search_toolbar);
         setSupportActionBar(toolbar);
 
+
+        //NAVIGATION DRAWER Добавляем
+        AppController.getInstance().getDrawer(this, toolbar);
+
+
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.categoriesRV);
         ArrayList<Category> categories = AppController.getInstance().getCategories();
         ArrayList<Drawable> icons = new ArrayList<>();
