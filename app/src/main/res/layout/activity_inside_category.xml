@@ -14,24 +14,17 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
 
-
         <include
             android:id="@+id/toolbarInsideCategory"
             layout="@layout/toolbar" />
     </android.support.design.widget.AppBarLayout>
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:text="We are inside of a category" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/categoriesRV"
+    <FrameLayout
+        android:id="@+id/containerCategory"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:layout_marginTop="?attr/actionBarSize" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="?android:attr/actionBarSize" />
 
 
     <!--<android.support.v4.widget.NestedScrollView-->
@@ -54,7 +47,7 @@
         android:baselineAlignBottom="true"
         android:clickable="true"
         android:src="@drawable/ic_search"
-        app:layout_anchor="@id/categoriesRV"
+        app:layout_anchor="@id/containerCategory"
         app:layout_anchorGravity="bottom|right|end"
-        app:layout_behavior=".fab.FloatingActionButtonBehavior"/>
+        app:layout_behavior=".fab.FloatingActionButtonBehavior" />
 </android.support.design.widget.CoordinatorLayout>

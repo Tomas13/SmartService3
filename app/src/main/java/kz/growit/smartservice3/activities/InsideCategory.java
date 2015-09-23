@@ -1,9 +1,11 @@
 package kz.growit.smartservice3.activities;
 
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import kz.growit.smartservice3.R;
+import kz.growit.smartservice3.fragments.DisplayListFragment;
 import kz.growit.smartservice3.singleton.AppController;
 
 public class InsideCategory extends AppCompatActivity {
@@ -27,9 +30,13 @@ public class InsideCategory extends AppCompatActivity {
 
 
         //NAVIGATION DRAWER Добавляем
-        AppController.getInstance().getDrawer(this, toolbar);
+        AppController.getInstance().getDrawer(this, toolbar, null);
+
+        DisplayListFragment fragment = new DisplayListFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.containerCategory, fragment).commit();
 
 
+        //just some action on fab
         findViewById(R.id.insideCategoryFAB).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

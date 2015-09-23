@@ -2,6 +2,8 @@ package kz.growit.smartservice3.adapters;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,24 +37,31 @@ public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.Ca
                 from(parent.getContext()).
                 inflate(R.layout.category_row, parent, false);
 
-
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent goToSearch = new Intent(v.getContext(), InsideCategory.class);
-                v.getContext().startActivity(goToSearch);
-
-            }
-        });
+//        itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent goToSearch = new Intent(v.getContext(), InsideCategory.class);
+//                v.getContext().startActivity(goToSearch);
+//
+//            }
+//        });
         return new CategoryViewHolder(itemView);
 
     }
 
     @Override
-    public void onBindViewHolder(CategoryViewHolder holder, int position) {
+    public void onBindViewHolder(CategoryViewHolder holder, final int position) {
         holder.categoryName.setText(categories.get(position).getDescription());
         holder.profilesCount.setText(String.valueOf(categories.get(position).getProfilesCount()));
         holder.imageView.setImageDrawable(icons.get(position));
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToSearch = new Intent(v.getContext(), InsideCategory.class);
+                v.getContext().startActivity(goToSearch);
+//                Snackbar.make(v,String.valueOf(categories.get(position).getId()),Snackbar.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -64,12 +73,13 @@ public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.Ca
     public static class CategoryViewHolder extends RecyclerView.ViewHolder{
         protected TextView categoryName, profilesCount;
         protected ImageView imageView;
+        protected CardView cardView;
         public CategoryViewHolder(View itemView) {
             super(itemView);
             categoryName = (TextView) itemView.findViewById(R.id.categoryNameCategoryRow);
             profilesCount = (TextView) itemView.findViewById(R.id.profilesCountCategoryRow);
             imageView = (ImageView) itemView.findViewById(R.id.thumbnailCategoryRow);
-
+            cardView = (CardView) itemView.findViewById(R.id.card_view);
         }
     }
 }

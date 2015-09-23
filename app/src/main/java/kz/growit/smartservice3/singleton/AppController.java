@@ -14,18 +14,24 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.mikepenz.fontawesome_typeface_library.FontAwesome;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import java.util.ArrayList;
 
 import kz.growit.smartservice3.R;
 import kz.growit.smartservice3.models.Category;
+import kz.growit.smartservice3.models.Specialization;
+import kz.growit.smartservice3.models.UserProfile;
 import kz.growit.smartservice3.utils.LruBitmapCache;
 
 
@@ -44,13 +50,34 @@ public class AppController extends Application{
 
     //custom vars
     private ArrayList<Category> Categories = new ArrayList<>();
-    private int SelectedCityId, SelectedRegionId, SelectedCategoryId, SelectedSpecializationId;
+    private ArrayList<Specialization> Specializations = new ArrayList<>();
+    private ArrayList<UserProfile> UserProfiles = new ArrayList<>();
+
+    private int SelectedCityId, SelectedRegionId, SelectedCategoryId, SelectedSpecializationId,
+            SelectedUserProfilesId;
     // end of custom vars
 
 
 
     //my methods
 
+
+    public ArrayList<UserProfile> getUserProfiles() {
+        return UserProfiles;
+    }
+
+    public void setUserProfiles(ArrayList<UserProfile> userProfiles) {
+        UserProfiles = userProfiles;
+    }
+
+
+    public ArrayList<Specialization> getSpecializations() {
+        return Specializations;
+    }
+
+    public void setSpecializations(ArrayList<Specialization> specializations) {
+        Specializations = specializations;
+    }
 
     public ArrayList<Category> getCategories() {
         return Categories;
@@ -143,8 +170,10 @@ public class AppController extends Application{
 
 
 
-    public Drawer getDrawer(final Activity activity, Toolbar toolbar){
+    //creating an navigation drawer
+    public Drawer getDrawer(final Activity activity, Toolbar toolbar, AccountHeader headerResult){
         return new DrawerBuilder()
+                .withAccountHeader(headerResult)
                 .withActivity(activity)
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggle(true)

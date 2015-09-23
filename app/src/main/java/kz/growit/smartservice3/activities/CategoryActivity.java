@@ -9,14 +9,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.mikepenz.materialdrawer.AccountHeader;
+import com.mikepenz.materialdrawer.AccountHeaderBuilder;
+import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 import kz.growit.smartservice3.R;
 import kz.growit.smartservice3.adapters.CategoryRVAdapter;
 import kz.growit.smartservice3.models.Category;
+import kz.growit.smartservice3.models.Specialization;
 import kz.growit.smartservice3.singleton.AppController;
 
 public class CategoryActivity extends AppCompatActivity {
@@ -29,9 +45,25 @@ public class CategoryActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.search_toolbar);
         setSupportActionBar(toolbar);
 
+        //creating an account header
+        // Create the AccountHeader
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile))
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        return false;
+                    }
+                })
+                .build();
+
 
         //NAVIGATION DRAWER Добавляем
-        AppController.getInstance().getDrawer(this, toolbar);
+        AppController.getInstance().getDrawer(this, toolbar, headerResult);
 
 
 
@@ -68,7 +100,38 @@ public class CategoryActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(myAdapter);
 
+        if(AppController.getInstance().getSelectedCategoryId()==0){
+            AppController.getInstance().setSelectedCategoryId(1);
+        }
+        String url = "http://smartservice.kz/api/SpecializationsApi/GetCategorySpecializations/" +
+                AppController.getInstance().getSelectedCategoryId();
 
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                url,
+                new JSONObject(),
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        ArrayList<Specialization> arrayList = new ArrayList<>();
+                        for (int i = 0; i < response.length(); i++) {
+                            try {
+                                Specialization temp = new Specialization(response.getJSONObject(i));
+                                arrayList.add(temp);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        AppController.getInstance().setSpecializations(arrayList);
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Spec request error",error.getMessage());
+                    }
+                });
+        AppController.getInstance().addToRequestQueue(jsonArrayRequest, "Spec request");
     }
 
     @Override
