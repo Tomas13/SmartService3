@@ -53,7 +53,7 @@ public class DisplayListFragment extends Fragment {
 
 
         if (AppController.getInstance().getSelectedCategoryId() == 0) {
-            AppController.getInstance().setSelectedCategoryId(1);
+            AppController.getInstance().setSelectedCategoryId(19);
         }
         AppController.getInstance().setSelectedCityId(1);
         AppController.getInstance().setSelectedRegionId(1);
@@ -88,7 +88,7 @@ public class DisplayListFragment extends Fragment {
                         ArrayList<UserProfile> arrayListUserProfiles = AppController.getInstance().getUserProfiles();
 
                         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.userProfilesRV);
-                        ProfileAdapter myAdapter = new ProfileAdapter(arrayListUserProfiles);
+                        ProfileAdapter myAdapter = new ProfileAdapter(arrayListUserProfiles, getActivity());
                         recyclerView.setHasFixedSize(true);
                         LinearLayoutManager llm = new LinearLayoutManager(view.getContext());
                         recyclerView.setLayoutManager(llm);

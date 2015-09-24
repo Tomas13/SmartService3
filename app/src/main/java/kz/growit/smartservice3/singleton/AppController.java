@@ -26,7 +26,10 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import kz.growit.smartservice3.R;
 import kz.growit.smartservice3.models.Category;
@@ -42,6 +45,7 @@ public class AppController extends Application{
     public static final String TAG = AppController.class
             .getSimpleName();
 
+    public static final String SERVERURL = "http://smartservice.kz";
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
 
@@ -61,6 +65,21 @@ public class AppController extends Application{
 
     //my methods
 
+    public Date fromServerDateToString(String serverDate){
+        SimpleDateFormat df;
+        if (serverDate.length() == 23)
+            df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
+        else if (serverDate.length() == 22)
+            df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SS");
+        else
+            df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        try {
+            return df.parse(serverDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     public ArrayList<UserProfile> getUserProfiles() {
         return UserProfiles;

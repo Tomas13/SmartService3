@@ -67,4 +67,9 @@ public class UserProfile {
     public String getNameSurname() {
         return NameSurname;
     }
+
+    public ArrayList<String> getAllPictures() {
+        return AllPictures;
+    }
+
 }

@@ -33,12 +33,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:background="#bfff29"
+            android:background="@color/colorPrimaryDark"
             android:gravity="center_vertical"
             android:minHeight="?android:attr/listPreferredItemHeight"
             android:orientation="horizontal">
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/lvis_photo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -58,7 +58,7 @@
                     android:layout_marginRight="6dp"
                     android:paddingLeft="0dp"
                     android:text="Jane Smith"
-                    android:textColor="@color/main_color_grey_700"
+                    android:textColor="@color/material_light_yellow_300"
                     android:textSize="14sp" />
 
 
@@ -68,17 +68,16 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="0dp"
                     android:text="2 hours ago"
-                    android:textColor="@color/main_color_grey_500"
+                    android:textColor="@color/main_color_grey_100"
                     android:textSize="12sp" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <ImageView
+        <com.daimajia.slider.library.SliderLayout
             android:id="@+id/ProfileImageUrl"
             android:layout_width="match_parent"
             android:layout_height="160dp"
-            android:background="#84ffbe"
             android:scaleType="centerCrop" />
 
         <LinearLayout
@@ -86,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:background="#fff586"
+            android:background="@color/colorPrimaryDark"
             android:gravity="right|center_vertical"
             android:minHeight="?android:attr/listPreferredItemHeight"
             android:orientation="horizontal"

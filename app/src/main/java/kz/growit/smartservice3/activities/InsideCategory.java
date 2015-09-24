@@ -1,11 +1,7 @@
 package kz.growit.smartservice3.activities;
 
-import android.app.FragmentTransaction;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -14,10 +10,12 @@ import android.view.View;
 
 import kz.growit.smartservice3.R;
 import kz.growit.smartservice3.fragments.DisplayListFragment;
+import kz.growit.smartservice3.fragments.DisplayMapFragment;
 import kz.growit.smartservice3.singleton.AppController;
 
 public class InsideCategory extends AppCompatActivity {
 
+    private View viewG;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +39,7 @@ public class InsideCategory extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Snackbar snack = Snackbar.make(view, "Hello Snackbar", Snackbar.LENGTH_LONG);
+                viewG = view;
                 View view1 = snack.getView();
                 view1.setBackgroundColor(getResources().getColor(R.color.snack));
 
@@ -65,6 +64,12 @@ public class InsideCategory extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.action_map) {
+            DisplayMapFragment mapFragment = new DisplayMapFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.containerCategory, mapFragment).commit();
             return true;
         }
 
